@@ -67,6 +67,7 @@ abstract class AbstractPartialBodyResolveTest : KotlinLightCodeInsightFixtureTes
 
     private fun dump(testPath: String, resolveMode: BodyResolveMode): String {
         myFixture.configureByText(KotlinFileType.INSTANCE, File(testPath).readText())
+        configureCompilerOptions(myFixture.file.text, project, module)
 
         val file = myFixture.file as KtFile
         val editor = myFixture.editor
