@@ -17,10 +17,7 @@
 package org.jetbrains.kotlin.cli.metadata
 
 import com.intellij.openapi.Disposable
-import org.jetbrains.kotlin.cli.common.CLICompiler
-import org.jetbrains.kotlin.cli.common.CLIConfigurationKeys
-import org.jetbrains.kotlin.cli.common.CommonCompilerPerformanceManager
-import org.jetbrains.kotlin.cli.common.ExitCode
+import org.jetbrains.kotlin.cli.common.*
 import org.jetbrains.kotlin.cli.common.arguments.K2MetadataCompilerArguments
 import org.jetbrains.kotlin.cli.common.messages.CompilerMessageSeverity.*
 import org.jetbrains.kotlin.cli.common.messages.MessageUtil
@@ -89,6 +86,8 @@ class K2MetadataCompiler : CLICompiler<K2MetadataCompilerArguments>() {
             collector.report(ERROR, "No source files")
             return ExitCode.COMPILATION_ERROR
         }
+
+        checkKotlinPackageUsage(environment, environment.getSourceFiles())
 
         try {
             val metadataVersion =
